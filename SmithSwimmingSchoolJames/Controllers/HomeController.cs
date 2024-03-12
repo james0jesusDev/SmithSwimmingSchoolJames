@@ -20,7 +20,7 @@ namespace SmithSwimmingSchoolJames.Controllers
         }
 
         public IActionResult Privacy()
-        {
+        {// Vista para el visinate no le damos rol de seguridad ya que primero tendra que estar registrado
             return View();
         }
 
