@@ -1,0 +1,29 @@
+﻿﻿@using SmithSwimmingSchoolJames.Models
+@model Administrador
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-7 offset-3">
+            <h2>Instructor Profile</h2>
+            <form asp-action="EditProfile">
+                <input type="hidden" asp-for="AdministratorId" />
+                <div class="form-group">
+                    <label asp-for="Administradorname"></label>
+                    <input asp-for="Administradorname" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="AdministradorUser"></label>
+                    <input asp-for="AdministradorUser" class="form-control" readonly="readonly" />
+                </div>
+                <br />
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Save and Back to Administrator home</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

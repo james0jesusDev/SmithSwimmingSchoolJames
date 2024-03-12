@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmithSwimmingSchoolJames.Models;
 using System.Diagnostics;
@@ -12,7 +13,7 @@ namespace SmithSwimmingSchoolJames.Controllers
         {
             _logger = logger;
         }
-
+        [Authorize]
         public IActionResult Index()
         {
             return View();
