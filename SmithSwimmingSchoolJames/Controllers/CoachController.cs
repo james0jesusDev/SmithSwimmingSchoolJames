@@ -10,6 +10,11 @@ using System.Security.Claims;
 
 namespace SmithSwimmingSchoolJames.Controllers
 {
+
+
+    // Control de cambios , coach nos falta el ver asistentes  
+
+
     [Authorize(Roles = "Admin,Coach")]
     public class CoachController : Controller
     {
@@ -148,9 +153,13 @@ namespace SmithSwimmingSchoolJames.Controllers
             var currentCoachId = GetCurrentCoachId();
 
             // Obtener los asistentes a la clase del entrenador actual
-            var attendees = await _db.Students
-                .Where(a => a.StudentId == currentCoachId)
-                .Include(a => a.StudentId)
+            var attendees = await _db.Coachs
+                .Where(s => s.CoachId == currentCoachId) 
+                .Select(s => new ClassAttendeesViewModel
+                {
+                    StudentName = s.Name,
+                    AttendanceDate = DateTime.Now // Puedes ajustar esto según tu lógica
+                })
                 .ToListAsync();
 
             return View(attendees);

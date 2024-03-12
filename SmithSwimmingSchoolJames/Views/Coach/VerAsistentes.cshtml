@@ -1,0 +1,21 @@
+﻿@model List<SmithSwimmingSchoolJames.ViewModels.ClassAttendeesViewModel>
+
+<h2>Asistentes a tu Clase</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre del Estudiante</th>
+            <th>Fecha de Asistencia</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var attendee in Model)
+        {
+            <tr>
+                <td>@attendee.StudentName</td>
+                <td>@attendee.AttendanceDate</td>
+            </tr>
+        }
+    </tbody>
+</table>
