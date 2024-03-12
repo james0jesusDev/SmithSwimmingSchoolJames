@@ -14,8 +14,7 @@ namespace SmithSwimmingSchoolJames.Data
         public DbSet <Instructor> Instructors  { get; set; }
         public DbSet <Student> Students  { get; set; }
         public DbSet <Enrollment> Enrollments  { get; set; }
-        public DbSet <ProgressReport> progressReports  { get; set; }
-
+        public DbSet <ProgressReport> ProgressReports  { get; set; }
 
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

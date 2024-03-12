@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SmithSwimmingSchoolJames.Data;
 using SmithSwimmingSchoolJames.Models;
+using SmithSwimmingSchoolJames.ViewModels;
+using System.Security.Claims;
 
 namespace SmithSwimmingSchoolJames.Controllers
 {
@@ -79,8 +83,81 @@ namespace SmithSwimmingSchoolJames.Controllers
 
 
 
-
-
         }
+        // Segundo
+        [Authorize(Roles = "Coach")]
+        public async Task<IActionResult> AddReport()
+        {
+            var students = await _db.Students.ToListAsync();
+            var coaches = await _db.Coachs.ToListAsync(); // Obtener todos los coaches disponibles
+            var currentCoachId = GetCurrentCoachId();
+            var viewModel = new ProgressReportViewModel
+            {
+                Students = students,
+                CoachId = currentCoachId,
+                Coaches = coaches // Asigna la lista de coaches al modelo
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Coach")]
+        public async Task<IActionResult> AddReport(ProgressReportViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Creando un nuevo informe de progreso
+                var progressReport = new ProgressReport
+                {
+                    CoachId = model.CoachId, // Asignando el CoachId seleccionado
+                    StudentId = model.StudentId,
+                    Content = model.Content,
+                    CreatedAt = DateTime.Now,
+                };
+
+                _db.ProgressReports.Add(progressReport);
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+
+            var students = await _db.Students.ToListAsync();
+            var coaches = await _db.Coachs.ToListAsync(); 
+            model.Students = students; 
+            model.Coaches = coaches; 
+            return View(model);
+        }
+
+
+        private int GetCurrentCoachId()// metodo para coger el id 
+        {
+            var claim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            if (claim != null && int.TryParse(claim.Value, out int currentCoachId))
+            {
+                return currentCoachId;
+            }
+            return 0; 
+        }
+
+
+
+
+        [Authorize(Roles = "Coach")]
+        public async Task<IActionResult> VerAsistentes()
+        {
+            var currentCoachId = GetCurrentCoachId();
+
+            // Obtener los asistentes a la clase del entrenador actual
+            var attendees = await _db.Students
+                .Where(a => a.StudentId == currentCoachId)
+                .Include(a => a.StudentId)
+                .ToListAsync();
+
+            return View(attendees);
+        }
+
+
     }
+
 }
+
