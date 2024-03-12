@@ -1,0 +1,25 @@
+﻿@model SmithSwimmingSchoolJames.ViewModels.AdministradorAddCourseViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-7 offset-3">
+            <h2>Add a new Course</h2>
+            <form asp-controller="Administrador" asp-action="AddCourse">
+                <div class="form-group">
+                    <label asp-for="Course.Name"></label>
+                    <input asp-for="Course.Name" class="form-control" />
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="Instructor.Name"></label>
+                    <select asp-for="Instructor.InstructorId" asp-items="Model.InstructorList" class="form-control">
+                        <option value="">Select an instructor</option>
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Save Course and Back to Administrador Home</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

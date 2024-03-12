@@ -7,7 +7,9 @@ namespace SmithSwimmingSchoolJames.Models
         public int CoachId { get; set; }
         public string? Name { get; set; }
         public string? PhoneNumber { get; set; }
-        
+
+        public string? CoachUser { get; set; }
+
         public virtual ICollection<Group>? Groups { get; set; } 
         public virtual ICollection<ProgressReport>? ProgressReports { get; set; }
     }

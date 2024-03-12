@@ -1,0 +1,21 @@
+﻿﻿<div class="container">
+    <div class="row">
+        <div class="col-md-7 offset-3">
+            <h2>Coach Home</h2>
+            @{
+                if ((bool)ViewData["Registrado"])
+                {
+                    <p><a asp-action="EditProfile" asp-route-id="@ViewBag.CoachId" class="btn btn-light">Edit Profile</a></p>
+                }
+                else
+                {
+                    <p><a asp-action="AddProfile" class="btn btn-light">Add Profile</a></p>
+                }
+            }
+            <p><a asp-action="AllProfiles" class="btn btn-dark">Coach List</a></p>
+            <p><a asp-action="AddCourse" class="btn btn-dark">Añadir reports alumno</a></p>
+
+            <p><a asp-action="AssignGroups" class="btn btn-dark">Ver asistentes a clases</a></p>
+        </div>
+    </div>
+</div>
