@@ -1,0 +1,34 @@
+﻿@model List<SmithSwimmingSchoolJames.Models.ProgressReport>
+
+<h2>Informes de Progreso</h2>
+
+@if (Model.Count == 0)
+{
+    <p>No hay informes de progreso disponibles.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Fecha de Creación</th>
+                <th>Contenido</th>
+                <th>Id Reporte</th>
+                <th>CouchId</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var report in Model)
+            {
+                <tr>
+                    <td>@report.CreatedAt.ToString("dd/MM/yyyy")</td>
+                    <td>@report.Content</td>
+                    <td>@report.ProgressReportId</td>
+                    <td>@report.CoachId</td>
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
