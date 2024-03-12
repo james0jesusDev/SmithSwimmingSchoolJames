@@ -9,9 +9,9 @@
                     <label asp-for="Course.Name"></label>
                     <input asp-for="Course.Name" class="form-control" />
                 </div>
-                
+
                 <div class="form-group">
-                    <label asp-for="Instructor.Name"></label>
+                    <label asp-for="Instructor.InstructorId"></label>
                     <select asp-for="Instructor.InstructorId" asp-items="Model.InstructorList" class="form-control">
                         <option value="">Select an instructor</option>
                     </select>

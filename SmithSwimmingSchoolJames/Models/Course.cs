@@ -16,6 +16,7 @@ namespace SmithSwimmingSchoolJames.Models
         public string? Name { get; set; }
         public string? Description { get; set; }
         public string? Level { get; set; } 
+        public virtual Coach? Coach { get; set; }
         public int InstructorId { get; set; }
         [DisplayFormat(NullDisplayText ="No grade")]
         public CursoNiveles? CursoNiveles { get; set; }

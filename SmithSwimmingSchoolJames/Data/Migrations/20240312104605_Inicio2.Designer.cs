@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmithSwimmingSchoolJames.Data;
 
@@ -11,9 +12,11 @@ using SmithSwimmingSchoolJames.Data;
 namespace SmithSwimmingSchoolJames.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240312104605_Inicio2")]
+    partial class Inicio2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -276,9 +279,6 @@ namespace SmithSwimmingSchoolJames.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourseId"));
 
-                    b.Property<int?>("CoachId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("CursoNiveles")
                         .HasColumnType("int");
 
@@ -295,8 +295,6 @@ namespace SmithSwimmingSchoolJames.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CourseId");
-
-                    b.HasIndex("CoachId");
 
                     b.HasIndex("InstructorId");
 
@@ -490,17 +488,11 @@ namespace SmithSwimmingSchoolJames.Data.Migrations
 
             modelBuilder.Entity("SmithSwimmingSchoolJames.Models.Course", b =>
                 {
-                    b.HasOne("SmithSwimmingSchoolJames.Models.Coach", "Coach")
-                        .WithMany()
-                        .HasForeignKey("CoachId");
-
                     b.HasOne("SmithSwimmingSchoolJames.Models.Instructor", "Instructor")
                         .WithMany("Courses")
                         .HasForeignKey("InstructorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Coach");
 
                     b.Navigation("Instructor");
                 });

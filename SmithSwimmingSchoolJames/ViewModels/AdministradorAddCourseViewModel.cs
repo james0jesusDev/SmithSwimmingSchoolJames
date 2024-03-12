@@ -5,16 +5,14 @@ namespace SmithSwimmingSchoolJames.ViewModels
 {
     public class AdministradorAddCourseViewModel
     {
-
         public Course? Course { get; set; }
 
-        public Administrador? Administrador { get; set; }
-        public Instructor? Instructor { get; set; }
+        public Group? Group { get; set; }
+        public int CoachId { get; set; }
+        public Coach? Coach { get; set; }
 
-        public List<Group> Groups { get; set; }
-
-        public SelectList? AdministradorList { get; set; }
+        public Instructor? Instructor { get; set; } 
+        public SelectList? CoachList { get; set; }
         public SelectList? InstructorList { get; set; }
-
     }
 }

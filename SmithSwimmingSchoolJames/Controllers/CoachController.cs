@@ -16,7 +16,7 @@ namespace SmithSwimmingSchoolJames.Controllers
             _db = db;
         }
 
-        public async Task <IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
             ViewData["Registrado"] = false;
 
@@ -40,7 +40,7 @@ namespace SmithSwimmingSchoolJames.Controllers
         [Authorize(Roles = "Coach")]
         public async Task<IActionResult> AllProfiles()
         {
-            var admin = await _db.Administradors.ToListAsync();
+            var admin = await _db.Coachs.ToListAsync();
             return View(admin);
 
 
@@ -55,7 +55,7 @@ namespace SmithSwimmingSchoolJames.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> AddProfile(Administrador administrador)
+        public async Task<IActionResult> AddProfile(Coach administrador)
         {
             _db.Add(administrador);
             await _db.SaveChangesAsync();
@@ -64,11 +64,23 @@ namespace SmithSwimmingSchoolJames.Controllers
 
         }
 
+        [Authorize(Roles = "Coach")]
+        public async Task<IActionResult> EditProfile(int id)
+        {
+            var adminToUpadate = await _db.Coachs.FirstOrDefaultAsync(i => i.CoachId == id);
+            return View(adminToUpadate);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditProfile(Coach admin)
+        {
+            _db.Update(admin);
+            await _db.SaveChangesAsync();
+            return RedirectToAction("AllProfiles");
 
 
 
 
 
-
+        }
     }
 }
