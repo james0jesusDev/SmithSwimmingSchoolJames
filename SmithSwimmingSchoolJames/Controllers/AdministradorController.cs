@@ -117,7 +117,7 @@ namespace SmithSwimmingSchoolJames.Controllers
                 var newCourse = new Course
                 {
                     Name = vm.Course.Name,
-                 
+
                     InstructorId = vm.Instructor.InstructorId
                 };
                 _db.Courses.Add(newCourse);
@@ -133,5 +133,3 @@ namespace SmithSwimmingSchoolJames.Controllers
     }
 
 }
-
-
